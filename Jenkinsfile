@@ -31,6 +31,7 @@ pipeline {
         stage('Получение списка IP-адресов') {
             steps {
                 script {
+                    sh 'gcloud config set project my-diplom-472008 --quiet'
                     // Получаем список внешних IP-адресов для машин с именами prod* и dev*
                     def remoteIPs = sh(script: '''
                         gcloud compute instances list --filter="name~'^prod.*' OR name~'^dev.*'" --format="value(networkInterfaces[0].accessConfigs[0].natIP)" --quiet
@@ -46,6 +47,7 @@ pipeline {
         stage('Копирование файлов на удаленные сервера') {
             steps {
                 script {
+                    sh 'gcloud config set project my-diplom-472008 --quiet'
                     // Получение списка IP-адресов для машин с именами prod* и dev*
                     def remoteIPs = sh(script: '''
                         gcloud compute instances list --filter="name~'^prod.*' OR name~'^dev.*'" --format="value(networkInterfaces[0].accessConfigs[0].natIP)" --quiet
