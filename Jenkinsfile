@@ -88,9 +88,9 @@ pipeline {
             deleteDir()
             script {
             def message = "Сборка завершена. Результат: ${currentBuild.result}"
-//            def chatId = "" // Укажите ID чата, куда хотите отправить сообщение
-//            def token = "6178888383:AAGob2W61BfTrM0buDelKt5dL2T53z0VAOQ" // Ваш токен бота
-//            sh "curl -s -X POST https://api.telegram.org/bot${token}/sendMessage -d chat_id=${chatId} -d text='${message}'"
+            def chatId = "-1002678517458" // Укажите ID чата, куда хотите отправить сообщение
+            def token = "8270244334:AAE69VV835hnA_6delwctDo8HSe9NQtSK9Q" // Ваш токен бота
+            sh "curl -s -X POST https://api.telegram.org/bot${token}/sendMessage -d chat_id=${chatId} -d text='${message}'"
         }
         }
     }
