@@ -65,13 +65,13 @@ pipeline {
                      // Разделяем результат по пробельным символам и обрабатываем каждый IP
                         remoteIPs.split('\\s+').each { ip ->
                             // Создаем временную директорию на удаленном сервере
-                            sh "ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/my_ssh_key.pem ubuntu@${ip} 'mkdir -p /tmp/HTML_test'"                
+                            sh "ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/terraform_gcp ubuntu@${ip} 'mkdir -p /tmp/HTML_test'"                
                             // Копируем файлы на удаленный сервер
-                            sh "scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/my_ssh_key.pem -r ./pet-website/* ubuntu@${ip}:/tmp/HTML_test/"                
+                            sh "scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/terraform_gcp -r ./HTML_test/* ubuntu@${ip}:/tmp/HTML_test/"                
                             // Синхронизируем файлы в веб-директорию (с сохранением прав)
-                            sh "ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/my_ssh_key.pem ubuntu@${ip} 'sudo rsync -av /tmp/HTML_test/ /var/www/html/'"               
+                            sh "ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/mterraform_gcp ubuntu@${ip} 'sudo rsync -av /tmp/HTML_test/ /var/www/html/'"               
                             // Удаляем временную директорию
-                            sh "ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/my_ssh_key.pem ubuntu@${ip} 'rm -rf /tmp/HTML_test'"
+                            sh "ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/terraform_gcp ubuntu@${ip} 'rm -rf /tmp/HTML_test'"
                         }
                     }   
                 }
